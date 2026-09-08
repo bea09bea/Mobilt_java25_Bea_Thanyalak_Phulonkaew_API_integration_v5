@@ -15,12 +15,12 @@
         android:layout_height="94dp"
         android:text="Welcome to GitScope"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mailInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.227"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07" />
+        app:layout_constraintVertical_bias="0.654" />
 
     <EditText
         android:id="@+id/passwordInput"
@@ -41,8 +41,9 @@
         android:id="@+id/button"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:backgroundTint="@color/ic_launcher_background"
+        android:backgroundTint="@color/black"
         android:text="Sign in"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

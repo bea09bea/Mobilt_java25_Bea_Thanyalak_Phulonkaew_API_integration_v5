@@ -34,7 +34,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         val user = auth.currentUser
 
-        binding.welcome.text = user?.displayName
+        binding.welcome.text = "Welcome " + user?.displayName
 
         binding.logoutBtn.setOnClickListener {
             auth.signOut()

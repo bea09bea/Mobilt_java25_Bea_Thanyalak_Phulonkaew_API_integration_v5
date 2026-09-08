@@ -23,10 +23,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var editTextPassword: EditText
     private lateinit var button: Button
 
-//    private val correctMail = "test@gmail.com"
-//    private val correctPassword = "123"
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,10 +33,10 @@ class LoginActivity : AppCompatActivity() {
         editTextEmail = findViewById(R.id.mailInput)
         editTextPassword = findViewById(R.id.passwordInput)
         button = findViewById(R.id.button)
-        val email = editTextEmail.text.toString().trim()
-        val password = editTextPassword.text.toString()
 
         button.setOnClickListener {
+            val email = editTextEmail.text.toString().trim()
+            val password = editTextPassword.text.toString()
 
             if (email.isEmpty()) {
                 Toast.makeText(
@@ -85,26 +81,6 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
 
-            //logga in knapp
-//        binding.button.setOnClickListener {
-//            Firebase.analytics
-//
-//            val email = binding.mailInput.text.toString().trim()
-//            val password = binding.passwordInput.text.toString()
-//
-//            if (email == correctMail && password == correctPassword) {
-//                val intent = Intent(this, MainActivity::class.java)
-//                startActivity(intent)
-//                finish()
-//            } else {
-//                Toast.makeText(
-//                    this,
-//                    "Wrong mail or password",
-//                    Toast.LENGTH_LONG
-//                ).show()
-//            }
-//        }
-
         }
 
         //register link till register vy
@@ -112,8 +88,6 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
-
-
     }
 
     //kolla om användaren redan är inloggad
