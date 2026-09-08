@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">GitScope</string>
     <string name="hyperlink"><a href="https://gritacademy.se/">Register</a></string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
 </resources>

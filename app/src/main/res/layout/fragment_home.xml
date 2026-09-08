@@ -12,11 +12,30 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="387dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
-            android:text="home fragment"
+            android:text="GitScope"
+            android:textStyle="bold"
             android:textSize="34sp" />
+
+        <TextView
+            android:id="@+id/welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Welcome"
+            android:textSize="24sp" />
+
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="65dp" />
+
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textSize="24sp" />
     </LinearLayout>
 </FrameLayout>
