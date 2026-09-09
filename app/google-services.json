@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "661744398398",
+    "project_id": "gitscope-49803",
+    "storage_bucket": "gitscope-49803.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661744398398:android:4f271afe970cbd6076e16f",
+        "android_client_info": {
+          "package_name": "com.bea.gitscope"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtr0gZhfja7mbx3sDhRliTKZOu4rc8Jyw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

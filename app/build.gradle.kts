@@ -1,3 +1,11 @@
+import java.util.Properties
+import java.io.FileInputStream
+
+val localProperties = Properties()
+localProperties.load(FileInputStream(rootProject.file("local.properties")))
+
+val githubToken = localProperties.getProperty("GITHUB_TOKEN") ?: ""
+
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
@@ -17,6 +25,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "GITHUB_TOKEN",
+            "\"$githubToken\""
+        )
     }
 
     buildTypes {
@@ -29,6 +43,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     compileOptions {
@@ -52,9 +67,15 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
 
-    //firebase
+    //Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:34.18.0"))
     implementation("com.google.firebase:firebase-analytics")
+
+    //firebase autentication
+    implementation("com.google.firebase:firebase-auth")
+
+    //Real time database-bibliotek
+    implementation("com.google.firebase:firebase-database")
 
     //Github REST API
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
