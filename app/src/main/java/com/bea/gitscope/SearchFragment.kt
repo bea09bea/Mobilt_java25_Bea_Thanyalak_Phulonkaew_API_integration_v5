@@ -159,6 +159,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         )
     }
 
+    data class FavoriteUser(
+        val id: Long = 0,
+        val username: String = "",
+        val bio: String = ""
+        //, val avatarUrl: String = ""
+    )
+
     private fun saveFavorite(user: GitHubUser) {
 
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
@@ -168,12 +175,18 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             "https://gitscope-49803-default-rtdb.europe-west1.firebasedatabase.app"
         ).reference
 
+        val favoriteUser = FavoriteUser(
+            id = user.id,
+            username = user.name ?: "",
+            bio = user.bio ?: ""
+        )
+
         database
             .child("users")
             .child(currentUserId)
             .child("favorites")
             .child(user.id.toString())
-            .setValue(user)
+            .setValue(favoriteUser)
             .addOnSuccessListener {
                 Log.d("Firebase", "Favorit sparad: ${user.login}")
             }

@@ -29,6 +29,11 @@
             android:text="Welcome"
             android:textSize="24sp" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favoritesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <SearchView
             android:layout_width="match_parent"
             android:layout_height="65dp"
