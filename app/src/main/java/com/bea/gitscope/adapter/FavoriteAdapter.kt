@@ -14,26 +14,10 @@ class FavoriteAdapter :
         DiffCallback()
     ) {
 
-    inner class FavoriteViewHolder(
-        private val binding: ItemFavoriteBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
+        //Skapa korten
 
-        fun bind(favorite: SearchFragment.FavoriteUser) {
-            binding.favoriteUsername.text = favorite.username
-            binding.favoriteBio.text = favorite.bio
-
-            //bild
-//            Glide.with(binding.favoriteImage.context)
-//                .load(favorite.avatarUrl)
-//                .into(binding.favoriteImage)
-        }
-    }
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): FavoriteViewHolder {
-
+        //hämta layout från item_favorite.xml
         val binding = ItemFavoriteBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -44,9 +28,20 @@ class FavoriteAdapter :
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
+        //Fyller korten med data
         holder.bind(getItem(position))
     }
 
+    inner class FavoriteViewHolder(
+        private val binding: ItemFavoriteBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        //Visa resultat
+        fun bind(favorite: SearchFragment.FavoriteUser) {
+            binding.favoriteUsername.text = favorite.username
+            binding.favoriteBio.text = favorite.bio
+        }
+    }
     class DiffCallback : DiffUtil.ItemCallback<SearchFragment.FavoriteUser>() {
 
         override fun areItemsTheSame(

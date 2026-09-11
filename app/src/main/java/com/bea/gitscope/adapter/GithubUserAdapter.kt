@@ -15,15 +15,14 @@ class GitHubUserAdapter(
     private val onFavoriteClick: (GitHubUser, Boolean) -> Unit
 ) : RecyclerView.Adapter<GitHubUserAdapter.UserViewHolder>() {
 
+    //Håller layout för varje användarkort
     class UserViewHolder(
         val binding: UserCardBinding
     ) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): UserViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
 
+        //Hämtar layouten från user_card.xml
         val binding = UserCardBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -33,20 +32,16 @@ class GitHubUserAdapter(
         return UserViewHolder(binding)
     }
 
-    override fun onBindViewHolder(
-        holder: UserViewHolder,
-        position: Int
-    ) {
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+        //hämta användare för RecyclerView
         val user = users[position]
 
-        //data som visas
+        //fyller layout med sökande users data
         holder.binding.username.text = user.login
-        //holder.binding.name.text = user.name ?: "Inget namn"
         holder.binding.bio.text = user.bio ?: "Ingen bio"
         //holder.binding.repos.text = "Repositories: ${user.public_repos}"
         holder.binding.followers.text = "Followers: ${user.followers}"
         //holder.binding.createdAt.text = "Skapad: ${user.created_at}"
-
 
         // Hjärtikon
         holder.binding.favoriteButton.setImageResource(
@@ -60,6 +55,7 @@ class GitHubUserAdapter(
         holder.binding.favoriteButton.setOnClickListener {
             user.isFavorite = !user.isFavorite
 
+            //Uppdaterar hjärtikon när användare klickar
             holder.binding.favoriteButton.setImageResource(
                 if (user.isFavorite) {
                     R.drawable.heart
@@ -72,13 +68,13 @@ class GitHubUserAdapter(
         }
     }
 
+    //Räkna hur många kort som ska visas
     override fun getItemCount(): Int {
-        Log.d("Adapter", "Items: ${users.size}")
         return users.size
     }
 
+    //Uppdaterar listan med nya användare
     fun updateUsers(newUsers: List<GitHubUser>) {
-        Log.d("Adapter", "Users: ${newUsers.size}")
         users = newUsers
         notifyDataSetChanged()
     }

@@ -37,14 +37,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private var searchRunnable: Runnable? = null
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         Log.d("GitHub", "Searching for: $query")
 
+        //kopplar fragment_search.xml till kotlin kod
         _binding = FragmentSearchBinding.inflate(inflater,container,false)
 
+        //skapa adapter med tom lista först
         adapter = GitHubUserAdapter(emptyList()) { user, isFavorite ->
 
             if (isFavorite) {
@@ -54,12 +53,14 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
         }
 
+        //koppa adapter till RecyclerView
         binding.userRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.userRecyclerView.adapter = adapter
 
+        //lyssna vad användaren gör i sökfält
         binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
-            //sökbar + enter
+            //sökbar + enter -> API anrop
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (!query.isNullOrBlank()) {
                     searchGithubUsers(query)
@@ -80,9 +81,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         _binding = null
     }
 
+    //Skicka API GET request med endpoint
     private fun searchGithubUsers(query: String) {
 
         GitHubClient.api.searchUsers(query)
+            //API svarar
             .enqueue(object : Callback<GitHubSearchResponse> {
 
                 override fun onResponse(
@@ -91,20 +94,23 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 ) {
                     Log.d("GitHub", "Code: ${response.code()}")
                     Log.d("GitHub", "Body: ${response.body()}")
+
+                    //Om requesten lyckades
                     if (response.isSuccessful) {
 
+                        //hittar användarna
                         val searchUsers = response.body()?.items ?: emptyList()
+
+                        //fullständig lista av användare med all data som jag vill ha
                         val fullUsers = mutableListOf<GitHubUser>()
 
+                        //hämta mer information
                         searchUsers.forEach { searchUser ->
 
                             GitHubClient.api.getUser(searchUser.login)
                                 .enqueue(object : Callback<GitHubUser> {
 
-                                    override fun onResponse(
-                                        call: Call<GitHubUser>,
-                                        response: Response<GitHubUser>
-                                    ) {
+                                    override fun onResponse(call: Call<GitHubUser>, response: Response<GitHubUser>) {
                                         val user = response.body()
 
                                         if (response.isSuccessful && user != null) {
@@ -119,10 +125,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                                         }
                                     }
 
-                                    override fun onFailure(
-                                        call: Call<GitHubUser>,
-                                        t: Throwable
-                                    ) {
+                                    override fun onFailure(call: Call<GitHubUser>, t: Throwable) {
                                         Log.e("DETAIL", "Kunde inte hämta ${searchUser.login}", t)
                                     }
                                 })
@@ -144,10 +147,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     }
                 }
 
-                override fun onFailure(
-                    call: Call<GitHubSearchResponse>,
-                    t: Throwable
-                ) {
+                override fun onFailure(call: Call<GitHubSearchResponse>, t: Throwable) {
                     Log.e("GitHub", "Error", t)
                     Toast.makeText(
                         requireContext(),
@@ -218,10 +218,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             }
     }
 
-    private fun checkIfFavorite(
-        user: GitHubUser,
-        onResult: (Boolean) -> Unit
-    ) {
+    private fun checkIfFavorite(user: GitHubUser, onResult: (Boolean) -> Unit) {
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
             ?: return
 
