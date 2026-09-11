@@ -12,19 +12,18 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.bea.gitscope.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import androidx.navigation.ui.setupWithNavController
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     private lateinit var auth: FirebaseAuth
     private  var user : FirebaseUser? = null
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +44,10 @@ class MainActivity : AppCompatActivity() {
         //Hämta NavHostFragment
         val navHomeFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
-        //koppla bottom navigation till navigation graph
+        //koppla bottom navigation till nav_graph
         binding.bottomNavigation.setupWithNavController(navHomeFragment.navController)
+
+        //NavController håller koll på navigationen och backstacken
 
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
