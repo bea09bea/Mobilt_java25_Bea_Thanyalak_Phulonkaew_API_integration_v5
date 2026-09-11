@@ -1,17 +1,20 @@
-**Filstruktur:**
 
-com.bea.gitscope
+
+## Filstruktur
+
+```text
+com.bea.gitscope/
 │
-├── adapter
+├── adapter/
 │   ├── FavoriteAdapter.kt
 │   └── GithubUserAdapter.kt
 │
-├── model
+├── model/
 │   ├── GitHubSearchResponse.kt
 │   ├── GitHubUser.kt
 │   └── GithubSearchUser.kt
 │
-├── network
+├── network/
 │   ├── GitHubApi.kt
 │   └── RetrofitClient.kt
 │
@@ -20,3 +23,4 @@ com.bea.gitscope
 ├── MainActivity.kt
 ├── SearchFragment.kt
 └── HomeFragment.kt
+```
