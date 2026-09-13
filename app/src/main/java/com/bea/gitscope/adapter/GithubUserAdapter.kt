@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bea.gitscope.R
-import com.bea.gitscope.model.GitHubSearchUser
 import com.bea.gitscope.model.GitHubUser
 import com.bumptech.glide.Glide
 import com.bea.gitscope.databinding.UserCardBinding
@@ -36,12 +35,31 @@ class GitHubUserAdapter(
         //hämta användare för RecyclerView
         val user = users[position]
 
-        //fyller layout med sökande users data
+        //fyller layout med sökande users data (user_card)
         holder.binding.username.text = user.login
-        holder.binding.bio.text = user.bio ?: "Ingen bio"
-        //holder.binding.repos.text = "Repositories: ${user.public_repos}"
+        holder.binding.bio.text = user.bio ?: "No bio"
+        holder.binding.repositories.text = "Repositories: ${user.public_repos}"
         holder.binding.followers.text = "Followers: ${user.followers}"
-        //holder.binding.createdAt.text = "Skapad: ${user.created_at}"
+
+        val inputFormatter = java.text.SimpleDateFormat(
+            "yyyy-MM-dd'T'HH:mm:ss'Z'",
+            java.util.Locale.getDefault()
+        )
+
+        val outputFormatter = java.text.SimpleDateFormat(
+            "yyyy-MM-dd",
+            java.util.Locale.getDefault()
+        )
+
+        val parsedDate = inputFormatter.parse(user.updated_at)
+        val date = parsedDate?.let { outputFormatter.format(it) } ?: ""
+
+        holder.binding.updated.text = "Last update: $date"
+
+        //profil bild
+        Glide.with(holder.itemView.context)
+            .load(user.avatar_url)
+            .into(holder.binding.profileImage)
 
         // Hjärtikon
         holder.binding.favoriteButton.setImageResource(

@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
+            android:gravity="center"
             android:paddingTop="20dp"
             android:text="Search Developers"
             android:textColor="@color/black"
@@ -24,14 +24,15 @@
         <SearchView
             android:id="@+id/search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:paddingLeft="10dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/userRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:paddingLeft="20dp"
             android:paddingTop="10dp" />
 
     </LinearLayout>

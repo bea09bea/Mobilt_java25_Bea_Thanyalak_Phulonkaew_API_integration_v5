@@ -7,8 +7,7 @@ data class GitHubUser(
     val bio: String?,
     val public_repos: Int,
     val followers: Int,
-    val html_url: String,
-    val created_at: String,
+    val updated_at: String,
 
     //Most popular project:
     //Most used language:

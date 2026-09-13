@@ -162,8 +162,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     data class FavoriteUser(
         val id: Long = 0,
         val username: String = "",
-        val bio: String = ""
-        //, val avatarUrl: String = ""
+        val bio: String = "",
+        val avatarUrl: String = ""
     )
 
     private fun saveFavorite(user: GitHubUser) {
@@ -175,10 +175,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             "https://gitscope-49803-default-rtdb.europe-west1.firebasedatabase.app"
         ).reference
 
+        //(item_favorite)
         val favoriteUser = FavoriteUser(
             id = user.id,
             username = user.name ?: "",
-            bio = user.bio ?: ""
+            bio = user.bio ?: "",
+            avatarUrl = user.avatar_url
         )
 
         database

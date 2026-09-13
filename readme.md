@@ -15,8 +15,7 @@ com.bea.gitscope/
 │
 ├── model/
 │   ├── GitHubSearchResponse.kt
-│   ├── GitHubUser.kt
-│   └── GithubSearchUser.kt
+│   └── GitHubUser.kt
 │
 ├── network/
 │   ├── GitHubApi.kt

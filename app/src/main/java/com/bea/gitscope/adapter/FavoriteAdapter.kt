@@ -40,7 +40,9 @@ class FavoriteAdapter :
         fun bind(favorite: SearchFragment.FavoriteUser) {
             binding.favoriteUsername.text = favorite.username
             binding.favoriteBio.text = favorite.bio
-        }
+            Glide.with(binding.root.context)
+                .load(favorite.avatarUrl)
+                .into(binding.favoriteImage)        }
     }
     class DiffCallback : DiffUtil.ItemCallback<SearchFragment.FavoriteUser>() {
 
